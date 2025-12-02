@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-/// Text style helper for Poppins font with different weights
-/// Use these instead of directly using FontWeight to avoid const issues
 class AppTextStyles {
   AppTextStyles._();
 
   // Base font family
-  static const String _fontFamily = 'Poppins';
+  static const String _fontFamily = 'Axiforma';
 
   // Thin - 100
   static TextStyle thin({double? fontSize, Color? color}) => TextStyle(

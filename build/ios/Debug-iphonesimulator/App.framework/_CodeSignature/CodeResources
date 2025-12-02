@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		Ncr743dtNMHMalgeg3TNKNc/4eo=
+		b9lYNxNIoV8VZOGabwQ2wPCy9EY=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		1PojP94kM0ZYymsFVOOvcaC+bc4=
+		pwctZuk6UrRqw4pd+X+JtogIuAo=
 		</data>
 		<key>flutter_assets/NativeAssetsManifest.json</key>
 		<data>
@@ -43,6 +43,10 @@
 		<key>flutter_assets/assets/images/app_icon.jpg</key>
 		<data>
 		p4L/3/HMBEg9JHxBjvJfZggxrI0=
+		</data>
+		<key>flutter_assets/assets/images/apple.png</key>
+		<data>
+		I4jGtr6Gp3LNsMVFdCJmOH7mbTs=
 		</data>
 		<key>flutter_assets/assets/images/car.png</key>
 		<data>
@@ -70,7 +74,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		kWDK3kwbayETGiCfZj6q573qMn4=
+		aMS3wSqTB3KhQNdf/jC0L9LKU7I=
 		</data>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -103,7 +107,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ExeZ6kvUS1wFjDUL1ee1kuE4sq3tNjnc83n0kr9ZgVY=
+			lbF73t9fYwQMbDBtUWaxNsfjvR8NQ7sIPtKVUTt896Y=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -117,7 +121,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xC1xKa9qsgkROrvWMFG6fU23BV9YHeuuTjPGPZ6QTKc=
+			J5VbH168hVEPqFV0zw5jopbc3b26ETnFOgI0Y38YmfU=
 			</data>
 		</dict>
 		<key>flutter_assets/NativeAssetsManifest.json</key>
@@ -160,6 +164,13 @@
 			<key>hash2</key>
 			<data>
 			2nUWx+GZPNTA9w8WXtFXInJhJw7p+UYY1/eXNXEIk3M=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/apple.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Qm8m5xvqg2WeWKKxV1yKwnp5j/tBPcsQvEEXcScF4aI=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/car.png</key>
@@ -208,7 +219,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			C817bs7prhv2oKWWZyPDBaEUwqlE8EqotX9kHEbiNwg=
+			TP3LvI4dl4KrnTutkEY76+7LjLhkjZ1e9EG972Sb2eI=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>

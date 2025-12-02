@@ -2,19 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import '../../../config/theme/app_colors.dart';
 import '../../../config/routes/app_routes.dart';
+import '../../services/google_auth_service.dart';
+import '../../../injection_container.dart' as di;
+import '../widgets/custom_alert_dialog.dart';
+import '../../../config/theme/app_text_styles.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final VoidCallback? onAuthStateChanged;
+
+  const LoginPage({super.key, this.onAuthStateChanged});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GoogleAuthService _googleAuthService = di.sl<GoogleAuthService>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _rememberMe = false;
   bool _obscurePassword = true;
+  bool _isLoading = false;
+
+  Future<void> _handleGoogleSignIn() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final result = await _googleAuthService.signInWithGoogle();
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    result.fold(
+      (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(error.toString()),
+            backgroundColor: Colors.red,
+          ),
+        );
+      },
+      (userCredential) {
+        // Notify parent to rebuild and show profile page
+        widget.onAuthStateChanged?.call();
+      },
+    );
+  }
 
   @override
   void dispose() {
@@ -28,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: SingleChildScrollView(
@@ -66,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                               fontSize: 48,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.antiFlashWhite,
+                              color: AppColors.onBackground,
                               height: 1.2,
                               fontFamily: 'Axiforma',
                             ),
@@ -80,11 +115,10 @@ class _LoginPageState extends State<LoginPage> {
                     // Subtitle
                     Text(
                       'Sign in to access your package history and get real-time updates on all your shipments',
-                      style: TextStyle(
+                      style: AppTextStyles.regular(
                         fontSize: 14,
-                        color: AppColors.stone,
-                        height: 1.5,
-                      ),
+                        color: AppColors.textSecondary,
+                      ).copyWith(height: 1.5),
                     ),
 
                     const SizedBox(height: 40),
@@ -92,21 +126,24 @@ class _LoginPageState extends State<LoginPage> {
                     // Email/Phone Input
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
                         controller: _emailController,
-                        style: const TextStyle(color: AppColors.antiFlashWhite),
+                        style: AppTextStyles.regular(
+                          fontSize: 14,
+                          color: AppColors.onBackground,
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Enter your mail/phone number',
-                          hintStyle: TextStyle(
-                            color: AppColors.stone,
+                          hintStyle: AppTextStyles.regular(
+                            color: AppColors.textSecondary,
                             fontSize: 14,
                           ),
                           prefixIcon: Icon(
                             FluentIcons.mail_24_regular,
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             size: 20,
                           ),
                           border: InputBorder.none,
@@ -123,22 +160,25 @@ class _LoginPageState extends State<LoginPage> {
                     // Password Input
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
                         controller: _passwordController,
                         obscureText: _obscurePassword,
-                        style: const TextStyle(color: AppColors.antiFlashWhite),
+                        style: AppTextStyles.regular(
+                          fontSize: 14,
+                          color: AppColors.onBackground,
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Enter your password',
-                          hintStyle: TextStyle(
-                            color: AppColors.stone,
+                          hintStyle: AppTextStyles.regular(
+                            color: AppColors.textSecondary,
                             fontSize: 14,
                           ),
                           prefixIcon: Icon(
                             FluentIcons.lock_closed_24_regular,
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             size: 20,
                           ),
                           suffixIcon: IconButton(
@@ -146,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                               _obscurePassword
                                   ? FluentIcons.eye_off_24_regular
                                   : FluentIcons.eye_24_regular,
-                              color: AppColors.stone,
+                              color: AppColors.textSecondary,
                               size: 20,
                             ),
                             onPressed: () {
@@ -183,19 +223,19 @@ class _LoginPageState extends State<LoginPage> {
                                   });
                                 },
                                 activeColor: AppColors.primary,
-                                checkColor: AppColors.richBlack,
+                                checkColor: AppColors.background,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4),
                                 ),
-                                side: BorderSide(color: AppColors.stone),
+                                side: BorderSide(color: AppColors.textSecondary),
                               ),
                             ),
                             const SizedBox(width: 8),
                             Text(
                               'Remember me',
-                              style: TextStyle(
+                              style: AppTextStyles.regular(
                                 fontSize: 14,
-                                color: AppColors.stone,
+                                color: AppColors.textSecondary,
                               ),
                             ),
                           ],
@@ -209,10 +249,9 @@ class _LoginPageState extends State<LoginPage> {
                           },
                           child: Text(
                             'Forgot password?',
-                            style: TextStyle(
+                            style: AppTextStyles.medium(
                               fontSize: 14,
                               color: AppColors.primary,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
@@ -227,21 +266,33 @@ class _LoginPageState extends State<LoginPage> {
                       height: 56,
                       child: ElevatedButton(
                         onPressed: () {
+                          // Validate fields
+                          if (_emailController.text.trim().isEmpty ||
+                              _passwordController.text.trim().isEmpty) {
+                            CustomAlertDialog.show(
+                              context,
+                              title: 'Empty Fields',
+                              message:
+                                  'Please fill in both email and password fields to continue.',
+                              primaryButtonText: 'OK',
+                            );
+                            return;
+                          }
                           // Handle sign in
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
-                          foregroundColor: AppColors.richBlack,
+                          foregroundColor: AppColors.background,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(28),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Sign in',
-                          style: TextStyle(
+                          style: AppTextStyles.semiBold(
                             fontSize: 16,
-                            fontWeight: FontWeight.w600,
+                            color: AppColors.background,
                           ),
                         ),
                       ),
@@ -254,7 +305,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Expanded(
                           child: Divider(
-                            color: AppColors.darkGreen,
+                            color: AppColors.surface,
                             thickness: 1,
                           ),
                         ),
@@ -262,15 +313,15 @@ class _LoginPageState extends State<LoginPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
                             'Or',
-                            style: TextStyle(
+                            style: AppTextStyles.regular(
                               fontSize: 14,
-                              color: AppColors.stone,
+                              color: AppColors.textSecondary,
                             ),
                           ),
                         ),
                         Expanded(
                           child: Divider(
-                            color: AppColors.darkGreen,
+                            color: AppColors.surface,
                             thickness: 1,
                           ),
                         ),
@@ -284,35 +335,93 @@ class _LoginPageState extends State<LoginPage> {
                       width: double.infinity,
                       height: 56,
                       child: OutlinedButton(
-                        onPressed: () {
-                          // Handle Google sign in
-                        },
+                        onPressed: _isLoading ? null : _handleGoogleSignIn,
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.antiFlashWhite,
-                          side: BorderSide(color: AppColors.darkGreen),
+                          foregroundColor: AppColors.onBackground,
+                          side: BorderSide(color: AppColors.surface),
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(28),
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.network(
-                              'https://www.google.com/favicon.ico',
-                              width: 20,
-                              height: 20,
-                            ),
-                            const SizedBox(width: 12),
-                            const Text(
-                              'Continue with google',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                        child: _isLoading
+                            ? SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppColors.onBackground,
+                                  ),
+                                ),
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.network(
+                                    'https://www.google.com/favicon.ico',
+                                    width: 20,
+                                    height: 20,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    'Continue with google',
+                                    style: AppTextStyles.medium(
+                                      fontSize: 16,
+                                      color: AppColors.onBackground,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Sign in with Apple Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 56,
+                      child: OutlinedButton(
+                        onPressed: _isLoading ? null : _handleGoogleSignIn,
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: AppColors.onBackground,
+                          side: BorderSide(color: AppColors.surface),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(28),
+                          ),
                         ),
+                        child: _isLoading
+                            ? SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppColors.onBackground,
+                                  ),
+                                ),
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/images/apple.png',
+                                    width: 20,
+                                    height: 20,
+                                    color: AppColors.onBackground,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    'Sign in with Apple ID',
+                                    style: AppTextStyles.medium(
+                                      fontSize: 16,
+                                      color: AppColors.onBackground,
+                                    ),
+                                  ),
+                                ],
+                              ),
                       ),
                     ),
 
@@ -325,9 +434,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text(
                             "Don't have an account? ",
-                            style: TextStyle(
+                            style: AppTextStyles.regular(
                               fontSize: 14,
-                              color: AppColors.stone,
+                              color: AppColors.textSecondary,
                             ),
                           ),
                           TextButton(
@@ -341,10 +450,9 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: Text(
                               'Create an account',
-                              style: TextStyle(
+                              style: AppTextStyles.semiBold(
                                 fontSize: 14,
                                 color: AppColors.primary,
-                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),

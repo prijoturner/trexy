@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import '../../../config/theme/app_colors.dart';
-import '../../../config/routes/app_routes.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -38,13 +37,13 @@ class _RegisterPageState extends State<RegisterPage> {
         leading: IconButton(
           icon: Icon(
             FluentIcons.arrow_left_48_filled,
-            color: AppColors.antiFlashWhite,
+            color: AppColors.onBackground,
             size: 20,
           ),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: SingleChildScrollView(
@@ -80,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: TextStyle(
                               fontSize: 48,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.antiFlashWhite,
+                              color: AppColors.onBackground,
                               height: 1.2,
                               fontFamily: 'Axiforma',
                             ),
@@ -96,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       'Sign up to get started and enjoy all the features',
                       style: TextStyle(
                         fontSize: 14,
-                        color: AppColors.stone,
+                        color: AppColors.textSecondary,
                         height: 1.5,
                       ),
                     ),
@@ -106,21 +105,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     // Name Input
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
                         controller: _nameController,
-                        style: const TextStyle(color: AppColors.antiFlashWhite),
+                        style: const TextStyle(color: AppColors.onBackground),
                         decoration: InputDecoration(
                           hintText: 'Enter your name',
                           hintStyle: TextStyle(
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             fontSize: 14,
                           ),
                           prefixIcon: Icon(
                             FluentIcons.person_24_regular,
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             size: 20,
                           ),
                           border: InputBorder.none,
@@ -137,21 +136,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     // Email/Phone Input
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
                         controller: _emailController,
-                        style: const TextStyle(color: AppColors.antiFlashWhite),
+                        style: const TextStyle(color: AppColors.onBackground),
                         decoration: InputDecoration(
                           hintText: 'Enter your mail/phone number',
                           hintStyle: TextStyle(
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             fontSize: 14,
                           ),
                           prefixIcon: Icon(
                             FluentIcons.mail_24_regular,
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             size: 20,
                           ),
                           border: InputBorder.none,
@@ -168,22 +167,22 @@ class _RegisterPageState extends State<RegisterPage> {
                     // Password Input
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
                         controller: _passwordController,
                         obscureText: _obscurePassword,
-                        style: const TextStyle(color: AppColors.antiFlashWhite),
+                        style: const TextStyle(color: AppColors.onBackground),
                         decoration: InputDecoration(
                           hintText: 'Enter your password',
                           hintStyle: TextStyle(
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             fontSize: 14,
                           ),
                           prefixIcon: Icon(
                             FluentIcons.lock_closed_24_regular,
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             size: 20,
                           ),
                           suffixIcon: IconButton(
@@ -191,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               _obscurePassword
                                   ? FluentIcons.eye_off_24_regular
                                   : FluentIcons.eye_24_regular,
-                              color: AppColors.stone,
+                              color: AppColors.textSecondary,
                               size: 20,
                             ),
                             onPressed: () {
@@ -214,22 +213,22 @@ class _RegisterPageState extends State<RegisterPage> {
                     // Confirm Password Input
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
                         controller: _confirmPasswordController,
                         obscureText: _obscureConfirmPassword,
-                        style: const TextStyle(color: AppColors.antiFlashWhite),
+                        style: const TextStyle(color: AppColors.onBackground),
                         decoration: InputDecoration(
                           hintText: 'Confirm your password',
                           hintStyle: TextStyle(
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             fontSize: 14,
                           ),
                           prefixIcon: Icon(
                             FluentIcons.lock_closed_24_regular,
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             size: 20,
                           ),
                           suffixIcon: IconButton(
@@ -237,7 +236,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               _obscureConfirmPassword
                                   ? FluentIcons.eye_off_24_regular
                                   : FluentIcons.eye_24_regular,
-                              color: AppColors.stone,
+                              color: AppColors.textSecondary,
                               size: 20,
                             ),
                             onPressed: () {
@@ -268,7 +267,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
-                          foregroundColor: AppColors.richBlack,
+                          foregroundColor: AppColors.background,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(28),
@@ -295,7 +294,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             "Already have an account? ",
                             style: TextStyle(
                               fontSize: 14,
-                              color: AppColors.stone,
+                              color: AppColors.textSecondary,
                             ),
                           ),
                           TextButton(

@@ -29,7 +29,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         leading: IconButton(
           icon: Icon(
             FluentIcons.arrow_left_48_filled,
-            color: AppColors.antiFlashWhite,
+            color: AppColors.onBackground,
             size: 20,
           ),
           onPressed: () => Navigator.pop(context),
@@ -71,7 +71,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             style: TextStyle(
                               fontSize: 48,
                               fontWeight: FontWeight.w600,
-                              color: AppColors.antiFlashWhite,
+                              color: AppColors.onBackground,
                               height: 1.2,
                               fontFamily: 'Axiforma',
                             ),
@@ -87,7 +87,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       'Enter your email to receive a password reset link.',
                       style: TextStyle(
                         fontSize: 14,
-                        color: AppColors.stone,
+                        color: AppColors.textSecondary,
                         height: 1.5,
                       ),
                     ),
@@ -97,21 +97,21 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     // Email Input
                     Container(
                       decoration: BoxDecoration(
-                        color: AppColors.darkGreen,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
                         controller: _emailController,
-                        style: const TextStyle(color: AppColors.antiFlashWhite),
+                        style: const TextStyle(color: AppColors.onBackground),
                         decoration: InputDecoration(
                           hintText: 'Enter your email',
                           hintStyle: TextStyle(
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             fontSize: 14,
                           ),
                           prefixIcon: Icon(
                             FluentIcons.mail_24_regular,
-                            color: AppColors.stone,
+                            color: AppColors.textSecondary,
                             size: 20,
                           ),
                           border: InputBorder.none,
@@ -135,7 +135,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
-                          foregroundColor: AppColors.richBlack,
+                          foregroundColor: AppColors.background,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(28),

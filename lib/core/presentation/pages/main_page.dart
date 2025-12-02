@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 import 'login_page.dart';
+import 'profile_page.dart';
+import '../../services/google_auth_service.dart';
+import '../../../injection_container.dart' as di;
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -11,18 +14,30 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
+  final GoogleAuthService _googleAuthService = di.sl<GoogleAuthService>();
 
-  final List<Widget> _pages = [
-    const PlaceholderPage(title: 'Home'),
-    const PlaceholderPage(title: 'Search'),
-    const PlaceholderPage(title: 'Parking'),
-    const LoginPage(),
-  ];
+  void _refreshAuthState() {
+    setState(() {
+      // This will rebuild and check authentication state
+    });
+  }
+
+  List<Widget> _getPages() {
+    final isAuthenticated = _googleAuthService.isAuthenticated;
+    return [
+      const PlaceholderPage(title: 'Home'),
+      const PlaceholderPage(title: 'Search'),
+      const PlaceholderPage(title: 'Parking'),
+      isAuthenticated
+          ? ProfilePage(onAuthStateChanged: _refreshAuthState)
+          : LoginPage(onAuthStateChanged: _refreshAuthState),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: _getPages()[_currentIndex],
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentIndex,
         onTap: (index) {

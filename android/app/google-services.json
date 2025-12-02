@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "286655438694",
+    "project_id": "elektra-beb5b",
+    "storage_bucket": "elektra-beb5b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286655438694:android:82170aed17fbfcc56872a7",
+        "android_client_info": {
+          "package_name": "com.example.almasmarineapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-JzvX2DvFmWYr_Xi9RMFmUtPisUX7LyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286655438694:android:021693b3c9e693f76872a7",
+        "android_client_info": {
+          "package_name": "com.example.trexy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-JzvX2DvFmWYr_Xi9RMFmUtPisUX7LyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

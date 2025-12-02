@@ -18,7 +18,7 @@ class CustomBottomNavBar extends StatelessWidget {
       child: Container(
         height: 70,
         decoration: BoxDecoration(
-          color: AppColors.darkGreen,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(35), // Capsule shape
           boxShadow: [
             BoxShadow(
@@ -91,7 +91,7 @@ class _NavBarItem extends StatelessWidget {
               key: ValueKey('$assetPath-$isActive'),
               width: 24,
               height: 24,
-              color: isActive ? AppColors.richBlack : AppColors.stone,
+              color: isActive ? AppColors.background : AppColors.textSecondary,
             ),
           ),
         ),
