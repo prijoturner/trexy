@@ -1,0 +1,1 @@
+ /Users/rplus/Documents/Jo/trexy/.dart_tool/flutter_build/88bf8507d32728abc07d305235da01e8/native_assets.json: 
